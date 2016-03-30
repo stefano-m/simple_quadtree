@@ -1,3 +1,6 @@
+.. image:: https://travis-ci.org/stefano-m/simple_quadtree.svg?branch=master
+    :target: https://travis-ci.org/stefano-m/simple_quadtree
+
 =================
  Simple QuadTree
 =================
