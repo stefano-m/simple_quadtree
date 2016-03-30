@@ -1,8 +1,7 @@
 [run]
 branch = true
-source = src
-omit = test_*
 
 [report]
+omit = *test_*
 precision = 2
 show_missing = true
