@@ -1,5 +1,7 @@
 [run]
 branch = true
+source = src
+omit = test_*
 
 [report]
 precision = 2
