@@ -1,0 +1,5 @@
+global-exclude *~
+include *.md
+include *.txt
+include tox.ini
+recursive-include tests *.py
