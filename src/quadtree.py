@@ -18,7 +18,7 @@ from __future__ import division
 
 try:
     from functools import reduce
-except ImportError:
+except ImportError:  # pragma: no cover
     pass
 
 __version__ = '1.0.0'
