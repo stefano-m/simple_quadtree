@@ -25,7 +25,7 @@ setup(
     description='Pure Python implementation of a simple QuadTree.',
     long_description=LONG_DESCRIPTION,
     author='Stefano Mazzucco',
-    author_email='stefano <AT> curso <DOT re',
+    author_email='stefano <AT> curso <DOT> re',
     url='https://github.com/stefano-m/simple_quadtree',
     download_url='https://github.com/stefano-m/simple_quadtree/releases',
     classifiers=[
