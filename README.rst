@@ -1,6 +1,9 @@
 .. image:: https://travis-ci.org/stefano-m/simple_quadtree.svg?branch=master
     :target: https://travis-ci.org/stefano-m/simple_quadtree
 
+.. image:: https://codecov.io/github/stefano-m/simple_quadtree/coverage.svg?branch=master
+    :target: https://codecov.io/github/stefano-m/simple_quadtree?branch=master
+
 =================
  Simple QuadTree
 =================
