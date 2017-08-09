@@ -42,6 +42,7 @@ class QuadTree(object):
                           lowest level quadrant
 
         """
+        _validate_bbox(bbox)
         self.max_items = max_items
         self.max_depth = int(max_depth) if max_depth >= 0 else 0
         self.bbox = bbox
@@ -178,3 +179,12 @@ def _inside(element, bbox):
     x0, y0, x1, y1 = bbox
     _, x, y = element
     return x0 <= x < x1 and y0 <= y < y1
+
+
+def _validate_bbox(bbox):
+    x0, y0, x1, y1 = bbox
+    x_ok = x0 < x1
+    y_ok = y0 < y1
+    if not x_ok and not y_ok:
+        raise ValueError(
+            'Invalid bounding box: {}'.format(bbox))

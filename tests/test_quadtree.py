@@ -4,6 +4,15 @@ import quadtree as sqt
 
 
 class TestQuadtree(unittest.TestCase):
+    def test_wrong_bbox(self):
+        bbox = (10, 10, 0, 0)
+        with self.assertRaises(ValueError) as raised:
+            sqt.QuadTree(bbox)
+
+        self.assertEqual(
+            'Invalid bounding box: {}'.format(bbox),
+            raised.exception.args[0])
+
     def test_empty(self):
         q = sqt.QuadTree((1, 1, 5, 5))
         self.assertEqual([], q.contents)
