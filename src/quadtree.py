@@ -97,7 +97,8 @@ class QuadTree(object):
                          QuadTree(ne, self.max_items, self.max_depth - 1),
                          QuadTree(nw, self.max_items, self.max_depth - 1))
 
-        for element in self.contents:
+        while self.contents:
+            element = self.contents.pop()
             for child in self.children:
                 if child.insert(element):
                     break
