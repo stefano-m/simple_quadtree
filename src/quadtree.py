@@ -149,6 +149,12 @@ class QuadTree(object):
         else:
             return chain.from_iterable(self.children)
 
+    def __len__(self):
+        if self.contents:
+            return len(self.contents)
+        else:
+            return sum(len(child) for child in self.children)
+
     def __getitem__(self, key):
         """Will return the first element containing whose
         value equals key.
