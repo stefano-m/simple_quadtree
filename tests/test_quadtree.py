@@ -186,6 +186,23 @@ class TestQuadtree(unittest.TestCase):
 
         self.assertEqual(element, q[element[0]])
 
+    def test_iter(self):
+        q = sqt.QuadTree((0, 0, 5, 5), max_items=2, max_depth=2)
+        self.assertSetEqual(set(), {x for x in q})
+
+        e1 = ("hello1", 1, 1)
+        q.insert(e1)
+        self.assertSetEqual({e1}, {x for x in q})
+
+        e2 = ("hello2", 2, 2)
+        q.insert(e2)
+        self.assertSetEqual({e1, e2}, {x for x in q})
+
+        # split
+        e3 = ("hello3", 0, 1)
+        q.insert(e3)
+        self.assertSetEqual({e1, e2, e3}, {x for x in q})
+
     def test_lookup_absent_value(self):
         q = sqt.QuadTree((0, 0, 10, 10))
 

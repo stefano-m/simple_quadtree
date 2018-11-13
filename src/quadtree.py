@@ -16,6 +16,8 @@
 
 from __future__ import division
 
+from itertools import chain
+
 try:
     from functools import reduce
 except ImportError:  # pragma: no cover
@@ -140,6 +142,12 @@ class QuadTree(object):
     def __contains__(self, element):
         return (element in self.contents or
                 any(element in qt for qt in self.children))
+
+    def __iter__(self):
+        if self.contents:
+            return (element for element in self.contents)
+        else:
+            return chain.from_iterable(self.children)
 
     def __getitem__(self, key):
         """Will return the first element containing whose
