@@ -59,6 +59,10 @@ Example usage in Python 3
   True
   >>> q.insert(('element 3', 50, 50))
   False
+  >>> len(q)
+  2
+  >>> sorted((x for x in q), key=lambda x: x[0])
+  [('element 1', 0, 0), ('element 2', -1, -1)]
   >>> sorted(q.intersect (bbox))
   [('element 1', 0, 0), ('element 2', -1, -1)]
   >>> sorted(q.intersect((-0.5, -0.5, 2, 2)))
