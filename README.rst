@@ -20,6 +20,13 @@ and top-right spatial coordinates. E.g. ``bounding_box = (0, 4, 10, 20)``.
 
 See also https://en.wikipedia.org/wiki/Quadtree
 
+Supported Python Versions
+=========================
+
+As of version ``v2.0.0``, only Python 3.6 and 3.7 are supported, later versions
+of Python may work as well.
+
+
 Highlights
 ==========
 

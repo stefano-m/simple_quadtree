@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright 2016 - 2018: Stefano Mazzucco <stefano AT curso DOT re>
+# Copyright 2016 - 2020: Stefano Mazzucco <stefano AT curso DOT re>
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,18 +17,26 @@
 from __future__ import division
 
 from itertools import chain
+from typing import Any, List, Set, Tuple, Union
 
 try:
     from functools import reduce
 except ImportError:  # pragma: no cover
     pass
 
-__version__ = '1.1.0'
+__version__ = '2.0.0'
 __all__ = ['QuadTree']
+
+BoundingBox = Tuple[int, int, int, int]
+Element = Tuple[Any, int, int]
 
 
 class QuadTree(object):
-    def __init__(self, bbox, max_items=10, max_depth=10):
+    contents: List[Element]
+    children: Union[Tuple['QuadTree', 'QuadTree',
+                          'QuadTree', 'QuadTree'], Tuple]
+
+    def __init__(self, bbox: BoundingBox, max_items=10, max_depth=10):
         """Initialize a quadtree.
 
         :param bbox: bounding box, 4-iterable containing the bottom-left and
@@ -51,7 +59,7 @@ class QuadTree(object):
         self.contents = []
         self.children = ()
 
-    def insert(self, element):
+    def insert(self, element: Element) -> bool:
         """Insert an element in the quadtree. If the
         element's coordinates are not within the quadtree's
         bounding box, the insertion will fail.
@@ -103,7 +111,7 @@ class QuadTree(object):
                 if child.insert(element):
                     break
 
-    def intersect(self, bbox):
+    def intersect(self, bbox: BoundingBox) -> Set[Element]:
         """Return a list of elements of the quadtree
         that intersect the given bounding box.
 
@@ -121,10 +129,10 @@ class QuadTree(object):
                 lambda x, y: x.union(y),
                 (c.intersect(bbox) for c in self.children),
                 set())
-        return set(element for element in self.contents
-                   if _inside(element, bbox))
+        return {element for element in self.contents
+                if _inside(element, bbox)}
 
-    def _intersects_bbox(self, bbox):
+    def _intersects_bbox(self, bbox: BoundingBox) -> bool:
         x0, y0, x1, y1 = self.bbox
         xi0, yi0, xi1, yi1 = bbox
 
@@ -177,7 +185,7 @@ class QuadTree(object):
         return items[0]
 
 
-def _inside(element, bbox):
+def _inside(element: Element, bbox: BoundingBox) -> bool:
     """Test whether an element is inside a bounding box.
 
     :param element: 3-iterable, the first item
@@ -196,7 +204,7 @@ def _inside(element, bbox):
     return x0 <= x < x1 and y0 <= y < y1
 
 
-def _validate_bbox(bbox):
+def _validate_bbox(bbox: BoundingBox) -> None:
     x0, y0, x1, y1 = bbox
     x_ok = x0 < x1
     y_ok = y0 < y1
